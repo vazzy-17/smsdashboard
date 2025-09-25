@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Data Admin {% endblock %}
+
+{% block content %}
+<h2>Data Admin</h2>
+<a href="{% url 'admin_add' %}" class="btn btn-success mb-3">+ Tambah Admin</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for admin in admins %}
+        <tr>
+            <td>{{ admin.username }}</td>
+            <td>{{ admin.role }}</td>
+            <td>
+                <a href="{% url 'admin_edit' admin.id %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'admin_delete' admin.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-center">Belum ada admin</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

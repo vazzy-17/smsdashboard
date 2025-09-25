@@ -1,0 +1,29 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}{{ action }} Admin{% endblock %}
+
+{% block content %}
+<h2>{{action}} Admin</h2>
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" required value="{{admin.username|default_if_none:''}}">
+    </div>
+    <div class="mb-3">
+        <label for="password">Password {% if action == 'Edit' %}(biarkan kosong jika tidak diubah){% endif %}</label>
+        <input type="password" name="password" class="form-control" {% if action == 'Tambah' %}required{% endif %}>
+    </div>
+    <div class="mb-3">
+        <label for="role">Role</label>
+        <input type="text" name="role" class="form-control" value="{{ admin.role|default_if_none:''}}">
+    </div>
+    <button type="submit" class="btn btn-primary">{{ action }}</button>
+    <a href="{% url 'admin_list' %}" class="btn btn-secondary">Batal</a>
+</form>
+{% endblock %}

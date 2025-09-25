@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}{{ action }} Company{% endblock %}
+
+{% block content %}
+<h2>{{action}} Company</h2>
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" required value="{{company.username|default_if_none:''}}">
+    </div>
+    <div class="mb-3">
+        <label for="status">Status</label>
+        <input type="text" name="status" class="form-control" required value="{{company.status|default_if_none:''}}">
+    </div>
+    <div class="mb-3">
+        <label for="email">Email</label>
+        <input type="text" name="email" class="form-control" value="{{ company.email|default_if_none:''}}">
+    </div>
+        <div class="mb-3">
+        <label for="phone">Phone</label>
+        <input type="text" name="phone" class="form-control" value="{{ company.phone|default_if_none:''}}">
+    </div>
+    <button type="submit" class="btn btn-primary">{{ action }}</button>
+    <a href="{% url 'company_list' %}" class="btn btn-secondary">Batal</a>
+</form>
+{% endblock %}
