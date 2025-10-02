@@ -1,27 +1,40 @@
-CREATE TABLE public.admin
+CREATE TABLE admin
 (
-    id smallint NOT NULL DEFAULT nextval('admin_id_seq'::regclass),
-    username character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    id smallint NOT NULL primary key,
+    username varchar(30),
     password bytea,
-    token character varying(40) COLLATE pg_catalog."default",
+    token varchar(40),
     last_login timestamp without time zone,
     last_password_change timestamp without time zone,
-    email character varying(100) COLLATE pg_catalog."default",
-    secret_key text COLLATE pg_catalog."default",
-    role character varying(30) COLLATE pg_catalog."default",
-    CONSTRAINT admin_pkey PRIMARY KEY (id),
-    CONSTRAINT admin_token_key UNIQUE (token),
-    CONSTRAINT admin_username_key UNIQUE (username)
+    email varchar(100),
+    secret_key text,
+    role varchar(30)
 )
 
-CREATE TABLE public.company_group
+CREATE TABLE account_group
 (
-    id integer NOT NULL DEFAULT nextval('account_id_seq'::regclass),
-    username character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    status character varying(20) COLLATE pg_catalog."default",
-    email character varying(50) COLLATE pg_catalog."default",
-    phone character varying(20) COLLATE pg_catalog."default",
-    code character varying(8) COLLATE pg_catalog."default",
-    password bytea,
-    CONSTRAINT company_group_pkey PRIMARY KEY (id)
+    id integer NOT NULL primary key,
+    username varchar(100),
+    status varchar(20),
+    email varchar(50),
+    phone varchar(20),
+    code varchar(8),
+    password bytea
 )
+
+create table suppliers 
+(
+    id integer primary key,
+    name varchar(100) NOT NULL,
+    host varchar(100) NOT NULL,
+    port integer NOT NULL,
+    system_id varchar(100) NOT NULL,
+    password varchar(20) NOT NULL,
+    status boolean DEFAULT true,
+    priority integer default 1,
+    created_at timestamp default now()
+)
+
+CREATE SEQUENCE admin_id_seq AS smallint START WITH 1;
+CREATE SEQUENCE account_group_id_seq AS smallint START WITH 1;
+create SEQUENCE suppliers_is_seq as integer start with 1;

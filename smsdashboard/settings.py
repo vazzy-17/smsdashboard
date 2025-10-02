@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'smsdashboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'pydb',
         'USER': 'postgres',
         'PASSWORD' : 'admin',
         'HOST' : 'localhost',

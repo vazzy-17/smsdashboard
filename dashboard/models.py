@@ -26,7 +26,7 @@ class Company_group(models.Model):
     email = models.CharField(max_length=50,blank=True, null=True)
     phone = models.CharField(max_length=20,blank=True, null=True)
     code = models.CharField(max_length=8,blank=True,null=True)
-
+    password = models.BinaryField(max_length=30, unique=True)
     class Meta:
         db_table = 'account_group'
         managed = False  # ⬅️ penting!
